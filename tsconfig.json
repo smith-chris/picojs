@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+      "outDir": "./dist/",
+      "baseUrl": "./src",
+      "sourceMap": true,
+      "noImplicitAny": true,
+      "module": "es2015",
+      "moduleResolution": "node",
+      "allowSyntheticDefaultImports": true,
+      "target": "es5",
+      "jsx": "react"
+  },
+  "include": [
+      "./src/**/*"
+  ]
+}
