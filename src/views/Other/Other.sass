@@ -1,6 +1,32 @@
+@import 'styleguide'
+
 .other
   box-sizing: border-box
   height: 100vh
   text-align: center
-  background: url('assets/image.jpeg')
-  background-size: cover
+  background: $wenge
+  display: flex
+  flex-direction: column
+
+.header, .footer
+  height: 7 * $unit
+  width: 100%
+  background: $folly
+
+.content
+  display: flex
+  justify-content: center
+  height: 100%
+  padding: 2 * $unit $unit $unit
+
+.canvas
+  width: 8 * 8 * $unit
+  height: 8 * 8 * $unit
+  background: $black
+  border: $unit solid $black
+
+.palette
+  width: 4 * 10 * $unit
+  height: 4 * 10 * $unit
+  border: $unit solid $black
+  margin-left: 4 * $unit

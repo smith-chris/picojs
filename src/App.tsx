@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 
 import 'styles/fix.css'
+import 'styles/global.css'
 import Routes from 'routes/routes'
 
 type Props = {
