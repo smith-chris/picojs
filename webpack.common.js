@@ -52,12 +52,15 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/,
+        test: /\.(eot|ttf|woff|woff2|png|svg|jpg|jpeg|gif)$/,
         include: path.resolve('./src/assets'),
         use: [
           {
-            loader: 'file-loader',
-            options: isDev
+            loader: 'url-loader',
+            options: Object.assign({
+              limit: 16 * 1024
+            },
+              isDev
               ? {
                 // use full path in development for better readability
                 name: '[path][name].[ext]'
@@ -65,6 +68,7 @@ module.exports = {
               : {
                 outputPath: 'assets/'
               }
+            )
           }
         ]
       },
