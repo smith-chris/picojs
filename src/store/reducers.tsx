@@ -1,16 +1,19 @@
 import { combineReducers } from 'redux'
-import counter from './counter'
+import counter, {CounterState} from './counter'
+import draw, {DrawState} from './draw'
 
 declare global {
   type State = {
-    readonly counter: number,
+    readonly counter: CounterState,
+    readonly draw: DrawState
   }
 
   type Dispatch = Redux.Dispatch<State>
 }
 
 const reducers = combineReducers<State>({
-  counter
+  counter,
+  draw
 })
 
 export default reducers

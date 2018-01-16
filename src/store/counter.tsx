@@ -1,4 +1,5 @@
-const initialState = 0
+export type CounterState = number
+const initialState: CounterState = 0
 
 enum Action {
   INCREMENT = 'INCREMENT',
