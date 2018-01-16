@@ -5,15 +5,13 @@ import {
   Switch
 } from 'react-router-dom'
 
-import Main from 'views/Main/Main'
 import Draw from 'views/Draw/Draw'
 
 const Routes = () => {
   return (
     <Router>
       <Switch>
-        <Route exact path='/' component={Main}/>
-        <Route exact path='/draw' component={Draw}/>
+        <Route path='/' component={Draw}/>
       </Switch>
     </Router>
   )
