@@ -4,14 +4,14 @@
   box-sizing: border-box
   height: 100vh
   text-align: center
-  background: $wenge
+  background: $dark-gray
   display: flex
   flex-direction: column
 
 .header, .footer
   height: 7 * $unit
   width: 100%
-  background: $folly
+  background: $red
 
 .content
   display: flex
@@ -30,3 +30,7 @@
   height: 4 * 10 * $unit
   border: $unit solid $black
   margin-left: 4 * $unit
+  &Element
+    width: 10 * $unit
+    height: 10 * $unit
+    display: inline-block
