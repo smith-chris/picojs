@@ -1,12 +1,30 @@
 @import 'styleguide'
 
+$element-size: 10 * $unit
+
 .Palette
-  width: 4 * 10 * $unit
-  height: 4 * 10 * $unit
+  width: 4 * $element-size
+  height: 4 * $element-size
+  flex-shrink: 0
   border: $unit solid $black
   margin-left: 4 * $unit
   &Element
-    width: 10 * $unit
-    height: 10 * $unit
+    position: relative
+    width: $element-size
+    height: $element-size
     display: inline-block
-    
+    &Active
+      &:after, &:before
+        content: ' '
+        display: block
+        z-index: 1
+        position: absolute
+        width: 100%
+        height: 100%
+      &:after
+        border: $unit solid $white
+        top: -$unit
+        left: -$unit
+      &:before
+        border: $unit solid $black
+        box-sizing: border-box

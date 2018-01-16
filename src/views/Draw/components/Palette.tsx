@@ -1,24 +1,52 @@
 import React from 'react'
 import styles from './Palette.sass'
 import styleguide from 'styles/styleguide'
+import { connect } from 'react-redux'
 
-type Props = {
-  className?: string
-}
+import {
+  selectColor
+} from 'store/draw'
+
+type Props = StateProps & DispatchProps
 
 const Palette = (props: Props) => {
-  let { className } = props
+  let {selectedIndex, selectColorIndex} = props
   return (
-    <div className={[styles.Palette, className].join(' ')}>
-      {styleguide.palette.map(hex => (
+    <div className={styles.Palette}>
+      {styleguide.palette.map((hex, i) => (
         <span
           key={hex}
-          className={styles.PaletteElement}
+          className={[
+            styles.PaletteElement,
+            i === selectedIndex ? styles.PaletteElementActive : null
+          ].join(' ')}
           style={{ background: hex }}
+          onClick={() => {selectColorIndex(i)}}
         />
       ))}
     </div>
   )
 }
 
-export default Palette
+type StateProps = {
+  selectedIndex: number
+}
+const mapStateToProps = (state: State): StateProps => {
+  return {
+    selectedIndex: state.draw.colorIndex
+  }
+}
+
+type DispatchProps = {
+  selectColorIndex: (index: number) => void
+}
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
+  return {
+    selectColorIndex: (index: number) => dispatch(selectColor(index))
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Palette)
