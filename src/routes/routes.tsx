@@ -6,14 +6,14 @@ import {
 } from 'react-router-dom'
 
 import Main from 'views/Main/Main'
-import Other from 'views/Other/Other'
+import Draw from 'views/Draw/Draw'
 
 const Routes = () => {
   return (
     <Router>
       <Switch>
         <Route exact path='/' component={Main}/>
-        <Route exact path='/other' component={Other}/>
+        <Route exact path='/draw' component={Draw}/>
       </Switch>
     </Router>
   )

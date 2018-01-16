@@ -22,7 +22,7 @@ const Main = (props: Props) => {
   return (
     <div className={styles.main}>
       <Header>Main view</Header>
-      <Link to='/other'>
+      <Link to='/draw'>
         <Button/>
       </Link>
       <p>{counter}</p>
