@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styles from './Draw.sass'
+import { unit, palette } from 'styles/styleguide'
 import Palette from './components/Palette'
 import Slider from 'components/Slider/Slider'
+import Image from 'components/Image/Image'
 
 import {
   selectBrushSize,
@@ -27,7 +29,8 @@ class Draw extends Component<Props> {
       selectBrush,
       brushSize,
       selectSelection,
-      selectionSize
+      selectionSize,
+      colorIndex
     } = this.props
     return (
       <div className={styles.draw}>
@@ -37,13 +40,28 @@ class Draw extends Component<Props> {
           <div>
             <Palette />
             <div className={styles.inputGroup}>
+              <span 
+                className={styles.brushIndicator}
+                style={{background: colorIndex === 0 ? palette[6] : null}}  
+              >
+                <div 
+                  style={{
+                    width: brushSize * unit,
+                    height: brushSize * unit,
+                    background: palette[colorIndex]
+                  }}
+                />
+              </span>
               <Slider
+                className={styles.slider}
                 onChange={selectBrush}
                 value={brushSize}
               />
             </div>
             <div className={styles.inputGroup}>
+              <Image asset='selectionIcon'/>
               <Slider
+                className={styles.slider}              
                 onChange={selectSelection}
                 value={selectionSize}
               />
@@ -55,20 +73,14 @@ class Draw extends Component<Props> {
     )
   }
 }
-type StateProps = {
-  brushSize: number;
-  selectionSize: number;
-}
+type StateProps = State['draw']
 const mapStateToProps = (state: State): StateProps => {
-  return {
-    brushSize: state.draw.brushSize,
-    selectionSize: state.draw.selectionSize
-  }
+  return state.draw
 }
 
 type DispatchProps = {
-  selectBrush: (size: number) => void;
-  selectSelection: (size: number) => void;
+  selectBrush: (size: number) => void
+  selectSelection: (size: number) => void
 }
 const mapDispatchToProps = (
   dispatch: Dispatch

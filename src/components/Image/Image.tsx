@@ -3,6 +3,7 @@ import styles from './Image.sass'
 import { unit } from 'styles/styleguide'
 import sliderArrow, { ImageAsset } from 'assets/sliderArrow.png'
 import slider from 'assets/slider.png'
+import selectionIcon from 'assets/selectionIcon.png'
 
 type Assets = {
   [key: string]: ImageAsset
@@ -10,7 +11,8 @@ type Assets = {
 
 let assets: Assets = {
   sliderArrow,
-  slider
+  slider,
+  selectionIcon
 }
 
 type Props = {
