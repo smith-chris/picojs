@@ -1,7 +1,2 @@
-type Styleguide = {
-  palette: string[]
-}
-
-declare const styleguide: Styleguide
-
-export default styleguide
+export const palette: string[]
+export const unit: number

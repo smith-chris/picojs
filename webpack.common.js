@@ -5,6 +5,19 @@ const {WatchIgnorePlugin} = require('webpack')
 const isDev = process.argv.indexOf('-p') === -1
 let removeNull = array => array.filter(e => e !== null)
 
+let urlLoaderOptions = Object.assign({
+  limit: 16 * 1024
+},
+  isDev
+  ? {
+    // use full path in development for better readability
+    name: '[path][name].[ext]'
+  }
+  : {
+    outputPath: 'assets/'
+  }
+)
+
 module.exports = {
   output: {
     path: path.resolve('./dist'),
@@ -52,23 +65,22 @@ module.exports = {
         ]
       },
       {
-        test: /\.(eot|ttf|woff|woff2|png|svg|jpg|jpeg|gif)$/,
+        test: /\.(eot|ttf|woff|woff2|svg)$/,
         include: path.resolve('./src/assets'),
         use: [
           {
             loader: 'url-loader',
-            options: Object.assign({
-              limit: 16 * 1024
-            },
-              isDev
-              ? {
-                // use full path in development for better readability
-                name: '[path][name].[ext]'
-              }
-              : {
-                outputPath: 'assets/'
-              }
-            )
+            options: urlLoaderOptions
+          }
+        ]
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif)$/,
+        include: path.resolve('./src/assets'),
+        use: [
+          {
+            loader: 'sizeof-loader',
+            options: urlLoaderOptions
           }
         ]
       },

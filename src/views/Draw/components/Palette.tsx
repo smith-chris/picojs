@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './Palette.sass'
-import styleguide from 'styles/styleguide'
+import { palette } from 'styles/styleguide'
 import { connect } from 'react-redux'
 
 import {
@@ -13,7 +13,7 @@ const Palette = (props: Props) => {
   let {selectedIndex, selectColorIndex} = props
   return (
     <div className={styles.Palette}>
-      {styleguide.palette.map((hex, i) => (
+      {palette.map((hex, i) => (
         <span
           key={hex}
           className={[
