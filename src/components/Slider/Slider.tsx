@@ -17,7 +17,7 @@ const Slider = (props: Props) => {
         asset='sliderArrow' 
         className={styles.arrow}
         style={{
-          left: `${value * unit * 8}px`
+          left: `${(value - 1) * unit * 8}px`
         }}
       />
       <Image asset='slider' className={styles.slider}/>
@@ -25,8 +25,8 @@ const Slider = (props: Props) => {
         className={styles.range}
         type='range' 
         value={value} 
-        min={0} 
-        max={3} 
+        min={1} 
+        max={4} 
         onChange={(e) => { onChange(parseInt(e.target.value, 0)) }}
       />
     </span>
