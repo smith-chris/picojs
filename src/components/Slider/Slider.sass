@@ -9,6 +9,7 @@
   overflow: hidden
 
 .arrow
+  pointer-events: none
   position: absolute
   top: 0
   left: 0
@@ -16,3 +17,28 @@
 
 .slider
   position: relative
+
+.range
+  position: absolute
+  left: 0
+  top: 0
+  width: 100%
+  box-sizing: border-box
+  @-moz-document url-prefix()
+    left: -8px
+    top: 3px
+
+  &::track
+    height: 0
+
+  &::thumb
+    background: transparent
+    position: relative
+    z-index: 2
+    left: -2px
+    top: -2px
+    width: 5 * $unit
+    height: 5 * $unit
+    border: none
+    border-radius: 0
+  

@@ -1,3 +1,6 @@
 module.exports = {
-  plugins: [require('autoprefixer')]
+  plugins: [
+    require('postcss-input-style') ,
+    require('autoprefixer')
+  ]
 }

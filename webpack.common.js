@@ -105,12 +105,12 @@ module.exports = {
               namedExport: true
             }
           },
-          isDev ? null : 'postcss-loader',
+          'postcss-loader',
           {
             loader: 'sass-loader',
             options: {
               includePaths: [path.resolve('./src/styles')],
-              sourceMap: isDev
+              sourceMap: false
             }
           }
         ])

@@ -14,16 +14,19 @@ let assets: Assets = {
 }
 
 type Props = {
+  // tslint:disable-next-line
+  [key: string]: any,
   className?: string,
   asset: string
 }
 
 const Image = (props: Props) => {
-  let {className, asset} = props
+  let {className, asset, ...rest} = props
   let image = assets[asset]
 
   return (
     <img 
+      {...rest}
       className={[styles.Image, className].join(' ')}
       width={`${image.width * unit}px`}
       height={`${image.height * unit}px`}
