@@ -5,6 +5,7 @@ import { unit, palette } from 'styles/styleguide'
 import Palette from './components/Palette'
 import Slider from 'components/Slider/Slider'
 import Image from 'components/Image/Image'
+import Canvas from './components/Canvas'
 
 import {
   selectBrushSize,
@@ -36,9 +37,9 @@ class Draw extends Component<Props> {
       <div className={styles.draw}>
         <div className={styles.header} />
         <div className={styles.content}>
-          <div className={styles.canvas} />
+          <Canvas/>
           <div>
-            <Palette />
+            <Palette/>
             <div className={styles.inputGroup}>
               <span 
                 className={styles.brushIndicator}
