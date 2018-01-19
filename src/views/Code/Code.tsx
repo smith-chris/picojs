@@ -2,10 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styles from './Code.sass'
 import { updateTextAction } from 'store/code'
-import {Controlled as CodeMirror } from 'react-codemirror2'
-import 'codemirror/lib/codemirror.css'
-import './picoTheme.global.sass'
-import 'codemirror/mode/javascript/javascript'
+import Editor from './components/Editor'
 
 type Props = StateProps & DispatchProps
 
@@ -14,16 +11,9 @@ class Code extends Component<Props> {
     let { text, updateText } = this.props
     return (
       <div className={styles.Code}>
-        <CodeMirror
-          className={styles.text}
+        <Editor
+          onChange={updateText}
           value={text}
-          options={{
-            mode: 'javascript',
-            theme: 'pico'
-          }}
-          onBeforeChange={(editor, data, value) => {
-            updateText(value)
-          }}
         />
       </div>
     )
