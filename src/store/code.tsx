@@ -2,7 +2,9 @@ export type CodeState = {
   text: string
 }
 const initialState: CodeState = {
-  text: ''
+  text: `for (let i=0;i<15;i++){
+  log('hello'+i)  
+}`
 }
 
 enum ActionType {

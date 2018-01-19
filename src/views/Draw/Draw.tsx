@@ -70,8 +70,8 @@ class Draw extends Component<Props> {
     )
   }
 }
-type StateProps = State['draw']
-const mapStateToProps = (state: State): StateProps => {
+type StateProps = StoreState['draw']
+const mapStateToProps = (state: StoreState): StateProps => {
   return state.draw
 }
 

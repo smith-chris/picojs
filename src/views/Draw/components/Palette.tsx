@@ -31,7 +31,7 @@ const Palette = (props: Props) => {
 type StateProps = {
   selectedIndex: number
 }
-const mapStateToProps = (state: State): StateProps => {
+const mapStateToProps = (state: StoreState): StateProps => {
   return {
     selectedIndex: state.draw.colorIndex
   }

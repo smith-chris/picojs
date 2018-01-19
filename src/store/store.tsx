@@ -3,7 +3,7 @@ import { createStore, applyMiddleware } from 'redux'
 import rootReducer from './reducers'
 import isDev from 'utils/isDev'
 
-let store: Redux.Store<State>
+let store: Redux.Store<StoreState>
 if (isDev) {
   store = createStore(
     rootReducer,

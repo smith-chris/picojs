@@ -3,15 +3,15 @@ import draw, { DrawState } from './draw'
 import code, { CodeState } from './code'
 
 declare global {
-  type State = {
+  type StoreState = {
     readonly draw: DrawState,
     readonly code: CodeState
   }
 
-  type Dispatch = Redux.Dispatch<State>
+  type Dispatch = Redux.Dispatch<StoreState>
 }
 
-const reducers = combineReducers<State>({
+const reducers = combineReducers<StoreState>({
   draw,
   code
 })

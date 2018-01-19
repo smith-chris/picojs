@@ -19,7 +19,8 @@ const Editor = (props: Props) => {
       value={value}
       options={{
         mode: 'javascript',
-        theme: 'pico'
+        theme: 'pico',
+        tabSize: 2
       }}
       onBeforeChange={(editor, data, newValue) => {
         onChange(newValue)
