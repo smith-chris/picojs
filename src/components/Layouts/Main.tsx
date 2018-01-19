@@ -9,8 +9,12 @@ type Props = {
 const Main = (props: Props) => {
   let {className, children} = props
   return (
-    <div className={[styles.Main, className].join(' ')}>
-      {children}
+    <div className={styles.Main}>
+      <div className={styles.header}/>
+      <div className={styles.content}>
+        {children}
+      </div>
+      <div className={styles.footer}/>
     </div>
   )
 }

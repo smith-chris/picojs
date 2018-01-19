@@ -34,42 +34,38 @@ class Draw extends Component<Props> {
       colorIndex
     } = this.props
     return (
-      <div className={styles.draw}>
-        <div className={styles.header} />
-        <div className={styles.content}>
-          <Canvas/>
-          <div>
-            <Palette/>
-            <div className={styles.inputGroup}>
-              <span 
-                className={styles.brushIndicator}
-                style={{background: colorIndex === 0 ? palette[6] : null}}  
-              >
-                <div 
-                  style={{
-                    width: brushSize * unit,
-                    height: brushSize * unit,
-                    background: palette[colorIndex]
-                  }}
-                />
-              </span>
-              <Slider
-                className={styles.slider}
-                onChange={selectBrush}
-                value={brushSize}
-              />
-            </div>
-            <div className={styles.inputGroup}>
-              <Image asset='selectionIcon'/>
-              <Slider
-                className={styles.slider}              
-                onChange={selectSelection}
-                value={selectionSize}
-              />
-            </div>
+      <div className={styles.Draw}>
+        <Canvas/>
+        <div>
+          <Palette/>
+          <div className={styles.inputGroup}>
+          <span 
+            className={styles.brushIndicator}
+            style={{background: colorIndex === 0 ? palette[6] : null}}  
+          >
+            <div 
+              style={{
+                width: brushSize * unit,
+                height: brushSize * unit,
+                background: palette[colorIndex]
+              }}
+            />
+          </span>
+          <Slider
+            className={styles.slider}
+            onChange={selectBrush}
+            value={brushSize}
+          />
+          </div>
+          <div className={styles.inputGroup}>
+            <Image asset='selectionIcon'/>
+            <Slider
+              className={styles.slider}              
+              onChange={selectSelection}
+              value={selectionSize}
+            />
           </div>
         </div>
-        <div className={styles.footer} />
       </div>
     )
   }
