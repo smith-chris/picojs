@@ -86,11 +86,30 @@ module.exports = {
       },
       {
         test: /\.(css)$/,
-        include: path.resolve('./src'),
+        include: [
+          path.resolve('./src'), 
+          path.resolve('./node_modules')
+        ],
         use: ['style-loader', 'css-loader']
       },
       {
-        test: /\.(scss|sass)$/,
+        test: /\.global\.(scss|sass)$/,
+        include: path.resolve('./src'),
+        use: removeNull([
+          'style-loader',
+          'css-loader',
+          'postcss-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              includePaths: [path.resolve('./src/styles')]
+            }
+          }
+        ])
+      },
+      {
+        // match only files that do not contain word '.global'
+        test: /^(?!.*(\.global)).*\.(scss|sass)$/,
         include: path.resolve('./src'),
         use: removeNull([
           'style-loader',

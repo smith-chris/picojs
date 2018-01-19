@@ -1,0 +1,134 @@
+@import 'styleguide'
+
+$selection: $dark-purple
+$selection-inactive: $dark-gray
+$background: $dark-blue
+$cursor: 2 * $unit solid $red
+$gutters: $blue
+
+$keyword: $blue
+$definition: $peach
+
+$operator: $pink
+$property: $yellow
+
+$variable: $white
+$variable2: $variable
+$variable3: $variable
+
+$primitive: $orange
+$string: $primitive
+$string2: $red
+$number: $primitive
+
+$brackets: $light-gray
+
+$comment: $dark-green
+
+$error-bg: $red
+$error-color: $white
+
+$tag: black
+$attribute: black
+
+.cm-s-pico
+  &.CodeMirror
+    font-family: Pico
+    font-size: 4 * $unit
+    line-height: 1.8
+    background-color: $background
+    color: $brackets
+  
+  .CodeMirror-gutters 
+    background: $black
+    color: $gutters
+    border: none
+  
+  .CodeMirror-guttermarker, .CodeMirror-guttermarker-subtle, .CodeMirror-linenumber 
+    color: $gutters
+  
+  .CodeMirror-cursor 
+    border-left: $cursor
+  
+  div.CodeMirror-selected 
+    background: $selection-inactive
+  
+  &.CodeMirror-focused div.CodeMirror-selected 
+    background: $selection
+  
+  .CodeMirror-line 
+    &::selection 
+      background: $selection
+    
+    > span 
+      &::selection, > span::selection 
+        background: $selection
+      
+    
+    &::-moz-selection 
+      background: $selection
+    
+    > span 
+      &::-moz-selection, > span::-moz-selection 
+        background: $selection
+      
+    
+  
+  .CodeMirror-activeline-background 
+    background: rgba(0, 0, 0, 0)
+  
+  .cm-keyword 
+    color: $keyword
+  
+  .cm-operator 
+    color: $operator
+  
+  .cm-variable-2 
+    color: $variable2
+  
+  .cm-variable-3, .cm-type 
+    color: $variable3
+  
+  .cm-builtin 
+    color: $variable3
+  
+  .cm-atom, .cm-number 
+    color: $number
+  
+  .cm-def 
+    color: $definition
+  
+  .cm-string 
+    color: $string
+  
+  .cm-string-2 
+    color: $string2
+  
+  .cm-comment 
+    color: $comment
+  
+  .cm-variable 
+    color: $variable
+  
+  .cm-tag, .cm-meta 
+    color: $string2
+  
+  .cm-attribute 
+    color: $attribute
+  
+  .cm-property 
+    color: $property
+  
+  .cm-qualifier, .cm-variable-3, .cm-type 
+    color: $variable3
+  
+  .cm-tag 
+    color: $tag
+  
+  .cm-error 
+    color: $error-bg
+    background-color: $error-color
+  
+  .CodeMirror-matchingbracket 
+    text-decoration: underline
+    color: white !important
