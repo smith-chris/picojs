@@ -4,82 +4,20 @@ import { Link } from 'react-router-dom'
 import styles from './Code.sass'
 import { updateTextAction } from 'store/code'
 import Editor from './components/Editor'
-import Game, { app } from './components/Game'
+import Game from './components/Game'
+import * as gameCanvas from './components/gameCanvas'
 import Console from './components/Console'
 import MainLayout from 'components/Layouts/Main'
-import { Sprite, Application, Graphics, interaction, Rectangle } from 'pixi.js'
-import { image } from 'views/Draw/components/Canvas'
 
 type Props = StateProps & DispatchProps
 
-type State = {
-  messages: string[]
-}
-
 class Code extends Component<Props> {
-  _update: () => void
-  
-  state: State = {
-    messages: []
-  }
-
   componentWillUnmount () {
-    this.stopGame()
-  }
-
-  log = (value: string) => {
-    let { messages } = this.state  
-    this.setState({
-      messages: [...messages, value.toString()]
-    })
-  }
-
-  stopGame = () => {
-    app.ticker.remove(this._update)    
-  }
-
-  reset = () => {
-    let { stage } = app
-    this.stopGame()
-    while (stage.children[0]) { 
-      stage.removeChild(stage.children[0])
-    }
-    this.setState({
-      messages: []
-    })
-  }
-
-  handleRun = () => {
-    this.reset()
-    setTimeout(() => {
-      let { log } = this
-      let { stage } = app
-      let spr = () => {
-        let texture = app.renderer.generateTexture(
-          image, null, null,
-          new Rectangle(0, 0, 16, 16)
-        )
-        let result = new Sprite(texture)
-        result.anchor.set(0.5)
-        return result
-      }
-      let evalText = `
-      let update
-      ${this.props.text}
-      let __res = {update: update}
-      __res
-      `
-      // tslint:disable-next-line
-      this._update = eval(evalText).update
-      if (this._update) {
-        app.ticker.add(this._update)
-      }
-    })
+    gameCanvas.stop()
   }
 
   render () {
-    let { text, updateText } = this.props
-    let { messages } = this.state
+    let { text, updateText, logs } = this.props
 
     return (
       <MainLayout
@@ -88,9 +26,9 @@ class Code extends Component<Props> {
         }
         footer={
           <div>
-            <button onClick={this.stopGame}>Stop!</button>
+            <button onClick={gameCanvas.stop}>Stop!</button>
             {'   '}
-            <button onClick={this.handleRun}>Run!</button>
+            <button onClick={gameCanvas.run}>Run!</button>
           </div>
         }
       >
@@ -101,7 +39,7 @@ class Code extends Component<Props> {
           />
           <span className={styles.rightPane}>
             <Game/>
-            <Console messages={messages}/>
+            <Console messages={logs}/>
           </span>
         </div>
       </MainLayout>
@@ -110,11 +48,13 @@ class Code extends Component<Props> {
 }
 
 type StateProps = {
-  text: string
+  text: string,
+  logs: string[]
 }
 const mapStateToProps = (state: StoreState): StateProps => {
   return {
-    text: state.code.text
+    text: state.code.text,
+    logs: state.code.logs
   }
 }
 

@@ -1,13 +1,8 @@
 import React, { Component } from 'react'
 import styles from './Game.sass'
-import { Sprite, Application, Graphics, interaction } from 'pixi.js'
+import canvas from './gameCanvas'
 
-export const app = new Application({
-  width: 128,
-  height: 128
-})
-
-app.view.classList.add(styles.canvasElement)
+canvas.classList.add(styles.canvasElement)
 
 type Props = {
 }
@@ -15,7 +10,7 @@ type Props = {
 class Game extends Component<Props> {
   root: HTMLDivElement
   componentDidMount () {
-    this.root.appendChild(app.view)
+    this.root.appendChild(canvas)
   }
   render () {
     return (
