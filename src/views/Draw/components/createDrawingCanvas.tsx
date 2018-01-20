@@ -29,14 +29,16 @@ const createDrawingCanvas = (size = 16) => {
 
   let positions: string[] = []
   let isPointerPressed = false
-  let currentColor = ''
+  let currentColor = palette[store.getState().draw.colorIndex]
+  let img = new Graphics()  
+  img.beginFill(toHexNumber(currentColor))
 
   touchableArea.on('pointerdown', (event: InteractionEvent) => {
     positions = []
     let position = event.data.global
     let color = palette[store.getState().draw.colorIndex]
     if (color !== currentColor) {  
-      drawing.beginFill(toHexNumber(color))
+      img.beginFill(toHexNumber(color))
       currentColor = color
     }
     draw(position.x, position.y)
@@ -51,8 +53,6 @@ const createDrawingCanvas = (size = 16) => {
       draw(position.x, position.y)
     }
   })
-
-  let drawing = new Graphics()
 
   let isOutOfBunds = (a: Bounds, b: Bounds) => {
     if ( a.right <= b.left 
@@ -86,7 +86,7 @@ const createDrawingCanvas = (size = 16) => {
     bottom = Math.min(bottom, bounds.bottom)
     let id = left + 'x' + top
     if (positions.indexOf(id) === -1) {
-      drawing.drawRect(
+      img.drawRect(
         left, 
         top, 
         right - left, 
@@ -96,10 +96,23 @@ const createDrawingCanvas = (size = 16) => {
     }
   }
 
-  app.stage.addChild(touchableArea)
-  app.stage.addChild(drawing)
+  let drawInitialSprite = (graphics: Graphics, s1: number, s2: number, spriteSize: number) => {
+    let center = spriteSize / 2
+    let s1h = s1 / 2
+    let s3 = (s1h) + s2
+    graphics.drawRect(center - s1h, center - s1h, s1, s1)
+    graphics.drawRect(center - s3, center - s3, s2, s2)
+    graphics.drawRect(center + s1h, center - s3, s2, s2)
+    graphics.drawRect(center + s1h, center + s1h, s2, s2)
+    graphics.drawRect(center - s3, center + s1h, s2, s2)
+  }
 
-  return app
+  drawInitialSprite(img, 4, 2, size)
+
+  app.stage.addChild(touchableArea)
+  app.stage.addChild(img)
+
+  return {app, img}
 }
 
 export default createDrawingCanvas

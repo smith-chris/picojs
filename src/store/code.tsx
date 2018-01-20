@@ -2,9 +2,17 @@ export type CodeState = {
   text: string
 }
 const initialState: CodeState = {
-  text: `for (let i=0;i<15;i++){
-  log('hello'+i)  
-}`
+  text: `log("hello world!")
+
+let dot = spr()
+dot.x = 64
+dot.y = 64
+stage.addChild(dot)
+
+update = () => {
+  dot.rotation += .1
+}
+`
 }
 
 enum ActionType {

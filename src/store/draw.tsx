@@ -4,7 +4,7 @@ export type DrawState = {
   selectionSize: number
 }
 const initialState: DrawState = {
-  colorIndex: 0,
+  colorIndex: 7,
   brushSize: 1,
   selectionSize: 1
 }

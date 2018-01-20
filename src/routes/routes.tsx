@@ -14,7 +14,7 @@ const Routes = () => {
   return (
     <Router>
       <Switch>
-        <Route layout={MainLayout} exact path='/' component={Draw}/>
+        <Route exact path='/' component={Draw}/>
         <Route exact path='/code' component={Code}/>
       </Switch>
     </Router>
