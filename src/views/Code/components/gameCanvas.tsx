@@ -1,5 +1,5 @@
 import { Sprite, Application, Graphics, interaction, Rectangle } from 'pixi.js'
-import { image } from 'views/Draw/components/Canvas'
+import { image } from 'views/Draw/components/drawCanvas'
 import store from 'store/store'
 import { addLogAction, resetLogsAction } from 'store/code'
 
@@ -43,9 +43,9 @@ export const run = () => {
       return result
     }
     let evalText = `
-    let update
+    var update
     ${text}
-    let __res = {update: update}
+    var __res = {update: update}
     __res
     `
     // tslint:disable-next-line
