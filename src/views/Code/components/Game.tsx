@@ -4,14 +4,13 @@ import canvas from './gameCanvas'
 
 canvas.classList.add(styles.canvasElement)
 
-type Props = {
-}
-
-class Game extends Component<Props> {
+class Game extends Component {
   root: HTMLDivElement
+
   componentDidMount () {
     this.root.appendChild(canvas)
   }
+
   render () {
     return (
       <div 

@@ -5,7 +5,6 @@ import {
 } from 'react-router-dom'
 
 import Route from 'components/LayoutRoute/LayoutRoute'
-import MainLayout from 'components/Layouts/Main'
 
 import Draw from 'views/Draw/Draw'
 import Code from 'views/Code/Code'

@@ -1,6 +1,4 @@
 import { Sprite, Application, Graphics, interaction } from 'pixi.js'
-import slider from 'assets/slider.png'
-import { unit } from 'styles/styleguide'
 import store from 'store/store'
 import { palette } from 'styles/styleguide'
 
@@ -16,6 +14,7 @@ export default app.view
 export const image = new Graphics()  
 
 type InteractionEvent = interaction.InteractionEvent
+
 type Bounds = {
   left: number,
   right: number,

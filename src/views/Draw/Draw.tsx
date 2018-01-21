@@ -17,16 +17,6 @@ import {
 type Props = StateProps & DispatchProps
 
 class Draw extends Component<Props> {
-  state = {
-    sliderValue: 1
-  }
-
-  handleChange = (newValue: number) => {
-    this.setState({
-      sliderValue: newValue
-    })
-  }
-
   render() {
     let {
       selectBrush,
@@ -35,12 +25,9 @@ class Draw extends Component<Props> {
       selectionSize,
       colorIndex
     } = this.props
+
     return (
-      <MainLayout
-        header={
-          <Link to='/code'>Go to Code</Link>
-        }
-      >
+      <MainLayout header={<Link to='/code'>Go to Code</Link>}>
         <div className={styles.Draw}>
           <Canvas/>
           <div>
@@ -78,6 +65,7 @@ class Draw extends Component<Props> {
     )
   }
 }
+
 type StateProps = StoreState['draw']
 const mapStateToProps = (state: StoreState): StateProps => {
   return state.draw

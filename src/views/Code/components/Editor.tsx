@@ -6,16 +6,15 @@ import './picoTheme.global.sass'
 import 'codemirror/mode/javascript/javascript'
 
 type Props = {
-  className?: string,
   onChange: (newValue: string) => void,
   value: string
 }
 
 const Editor = (props: Props) => {
-  let {className, onChange, value} = props
+  let {onChange, value} = props
   return (
     <CodeMirror
-      className={[styles.Editor, className].join(' ')}
+      className={styles.Editor}
       value={value}
       options={{
         mode: 'javascript',

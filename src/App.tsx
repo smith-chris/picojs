@@ -4,16 +4,12 @@ import { Provider } from 'react-redux'
 import 'styles/fix.css'
 import 'styles/global.sass'
 import Routes from 'routes/routes'
+import store from 'store/store'
 
-type Props = {
-  // tslint:disable-next-line
-  store: Redux.Store<any>
-}
-
-export default class App extends Component<Props> {
+export default class App extends Component {
   render () {
     return (
-      <Provider store={this.props.store}>
+      <Provider store={store}>
         <Routes/>
       </Provider>
     )

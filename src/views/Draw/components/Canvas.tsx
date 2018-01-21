@@ -6,13 +6,15 @@ canvas.classList.add(styles.canvasElement)
 
 class Canvas extends Component {
   root: HTMLDivElement
+
   componentDidMount () {
     this.root.appendChild(canvas)
   }
+
   render () {
     return (
-      <div 
-        ref={ref => {this.root = ref}} 
+      <div
+        ref={ref => {this.root = ref}}
         className={styles.Canvas}
       />
     )
