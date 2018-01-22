@@ -75,9 +75,7 @@ type DispatchProps = {
   selectBrush: (size: number) => void
   selectSelection: (size: number) => void
 }
-const mapDispatchToProps = (
-  dispatch: Dispatch
-): DispatchProps => {
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
   return {
     selectBrush: (size: number) =>
       dispatch(selectBrushSize(size)),

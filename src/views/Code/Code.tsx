@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styles from './Code.sass'
-import { updateTextAction } from 'store/code'
 import Editor from './components/Editor'
 import Game from './components/Game'
 import * as gameCanvas from './components/gameCanvas'
@@ -63,7 +62,7 @@ type DispatchProps = {
 }
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
   return {
-    updateText: (value: string) => dispatch(updateTextAction(value))
+    updateText: (value: string) => dispatch({type: 'UpdateText', data: value})
   }
 }
 

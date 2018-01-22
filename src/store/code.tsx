@@ -1,72 +1,36 @@
+type Text = string
+type Log = string
+
 export type CodeState = {
-  text: string,
-  logs: string[]
+  text: Text,
+  logs: Log[]
 }
 const initialState: CodeState = {
-  text: `log("hello world!")
-
-let dot = spr()
-dot.x = 64
-dot.y = 64
-stage.addChild(dot)
-
-update = () => {
-  dot.rotation += .1
-}
-`,
+  text: `log("hello world!")\n\nlet dot = spr()\ndot.x = 64\ndot.y = 64
+  stage.addChild(dot)\n\nupdate = () => {\n  dot.rotation += .1\n}\n`,
   logs: []
 }
 
-enum ActionType {
-  UPDATE_TEXT = 'UPDATE_TEXT',
-  ADD_LOG = 'ADD_LOG',
-  RESET_LOGS = 'RESET_LOGS',
-}
+type Action
+  = { type: 'UpdateText', data: Text }
+  | { type: 'AddLog', data: Log }
+  | { type: 'ResetLogs' }
 
-type Action = {
-  type: ActionType,
-  data?: {
-    text?: CodeState['text'],
-    log?: string
-  }
-}
+export type CodeDispatch = (a: Action) => void
 
-type UpdateTextAction = (text: CodeState['text']) => Action
-export const updateTextAction: UpdateTextAction = (text = '') => ({
-  type: ActionType.UPDATE_TEXT,
-  data: {
-    text
-  }
-})
-
-type AddLogAction = (log: Action['data']['log']) => Action
-export const addLogAction: AddLogAction = (log = '') => ({
-  type: ActionType.ADD_LOG,
-  data: {
-    log
-  }
-})
-
-type ResetLogsAction = () => Action
-export const resetLogsAction: ResetLogsAction = () => ({
-  type: ActionType.RESET_LOGS
-})
-
-const counterReducer = (state = initialState, action: Action) => {
+type Reducer = (s: CodeState, a: Action) => CodeState
+const codeReducer: Reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.UPDATE_TEXT: {
-      return {...state, text: action.data.text}
-    }
-    case ActionType.ADD_LOG: {
-      return {...state, logs: [...state.logs, action.data.log]}
-    }
-    case ActionType.RESET_LOGS: {
+    case 'UpdateText':
+      return {...state, text: action.data}    
+    case 'AddLog':
+      return {...state, logs: [...state.logs, action.data]}    
+    case 'ResetLogs':
       return {...state, logs: []}
-    }
-    default: {
+    default:
+      const check: never = action
       return state
-    }
   }
 }
 
-export default counterReducer
+export default codeReducer

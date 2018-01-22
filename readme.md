@@ -1,6 +1,8 @@
-# PICO-8 JS
+# PICO-JS
 
 WIP, goal: to recreate PICO8 interface for web and learn typescript.
+
+You can see [demo here](http://smithchris.com/picojs)
 
 Based on: https://github.com/smith-chris/react-starter/tree/typescript 
 
