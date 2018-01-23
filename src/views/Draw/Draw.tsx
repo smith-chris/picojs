@@ -9,11 +9,6 @@ import Image from 'components/Image/Image'
 import Canvas from './components/Canvas'
 import MainLayout from 'components/Layouts/Main'
 
-import {
-  selectBrushSize,
-  selectSelectionSize
-} from 'store/draw'
-
 type Props = StateProps & DispatchProps
 
 class Draw extends Component<Props> {
@@ -71,16 +66,12 @@ const mapStateToProps = (state: StoreState): StateProps => {
   return state.draw
 }
 
-type DispatchProps = {
-  selectBrush: (size: number) => void
-  selectSelection: (size: number) => void
-}
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    selectBrush: (size: number) =>
-      dispatch(selectBrushSize(size)),
-    selectSelection: (size: number) =>
-      dispatch(selectSelectionSize(size))
+    selectBrush: (data) => 
+      dispatch({type: 'SelectBrushSize', data}),
+    selectSelection: (data) =>
+      dispatch({type: 'SelectSelectionSize', data})
   }
 }
 

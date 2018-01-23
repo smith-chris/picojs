@@ -11,14 +11,12 @@ const initialState: CodeState = {
   logs: []
 }
 
-type Action
+export type CodeAction
   = { type: 'UpdateText', data: Text }
   | { type: 'AddLog', data: Log }
   | { type: 'ResetLogs' }
 
-export type CodeDispatch = (a: Action) => void
-
-type Reducer = (s: CodeState, a: Action) => CodeState
+type Reducer = (s: CodeState, a: CodeAction) => CodeState
 const codeReducer: Reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'UpdateText':

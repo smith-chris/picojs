@@ -2,8 +2,8 @@ import logger from 'redux-logger'
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import isDev from 'utils/isDev'
 
-import draw, { DrawState } from './draw'
-import code, { CodeState, CodeDispatch } from './code'
+import draw, { DrawState, DrawAction } from './draw'
+import code, { CodeState, CodeAction } from './code'
 
 declare global {
   type StoreState = {
@@ -11,7 +11,7 @@ declare global {
     readonly code: CodeState
   }
 
-  type Dispatch = CodeDispatch
+  type Dispatch = (a: CodeAction | DrawAction) => void
 }
 
 const reducers = combineReducers<StoreState>({

@@ -3,10 +3,6 @@ import styles from './Palette.sass'
 import { palette } from 'styles/styleguide'
 import { connect } from 'react-redux'
 
-import {
-  selectColor
-} from 'store/draw'
-
 type Props = StateProps & DispatchProps
 
 const Palette = (props: Props) => {
@@ -38,11 +34,11 @@ const mapStateToProps = (state: StoreState): StateProps => {
 }
 
 type DispatchProps = {
-  selectColorIndex: (index: number) => void
+  selectColorIndex: (d: number) => void
 }
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
   return {
-    selectColorIndex: (index: number) => dispatch(selectColor(index))
+    selectColorIndex: (data) => dispatch({type: 'SelectColorIndex', data})
   }
 }
 

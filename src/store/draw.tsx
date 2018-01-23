@@ -1,7 +1,11 @@
+type ColorIndex = number
+type BrushSize = number
+type SelectionSize = number
+
 export type DrawState = {
-  colorIndex: number,
-  brushSize: number,
-  selectionSize: number
+  colorIndex: ColorIndex,
+  brushSize: BrushSize,
+  selectionSize: SelectionSize
 }
 const initialState: DrawState = {
   colorIndex: 7,
@@ -9,60 +13,23 @@ const initialState: DrawState = {
   selectionSize: 1
 }
 
-enum ActionType {
-  SELECT_COLOR = 'SELECT_COLOR',
-  SELECT_BRUSH_SIZE = 'SELECT_BRUSH_SIZE',
-  SELECT_SELECTION_SIZE = 'SELECT_SELECTION_SIZE'
-}
+export type DrawAction
+  = { type: 'SelectColorIndex', data: ColorIndex }
+  | { type: 'SelectBrushSize', data: BrushSize }
+  | { type: 'SelectSelectionSize', data: SelectionSize }
 
-type Action = {
-  type: ActionType,
-  data: {
-    colorIndex?: number,
-    brushSize?: number,
-    selectionSize?: number
-  }
-}
-
-type SelectColor = (index: number) => Action
-export const selectColor: SelectColor = (index = 0) => ({
-  type: ActionType.SELECT_COLOR,
-  data: {
-    colorIndex: index
-  }
-})
-
-type SelectBrushSize = (size: number) => Action
-export const selectBrushSize: SelectBrushSize = (size = 1) => ({
-  type: ActionType.SELECT_BRUSH_SIZE,
-  data: {
-    brushSize: size
-  }
-})
-
-type SelectSelectionSize = (size: number) => Action
-export const selectSelectionSize: SelectSelectionSize = (size = 1) => ({
-  type: ActionType.SELECT_SELECTION_SIZE,
-  data: {
-    selectionSize: size
-  }
-})
-
-const counterReducer = (state = initialState, action: Action) => {
+const drawReducer = (state = initialState, action: DrawAction) => {
   switch (action.type) {
-    case ActionType.SELECT_COLOR: {
-      return {...state, colorIndex: action.data.colorIndex}
-    }
-    case ActionType.SELECT_BRUSH_SIZE: {
-      return {...state, brushSize: action.data.brushSize}
-    }
-    case ActionType.SELECT_SELECTION_SIZE: {
-      return {...state, selectionSize: action.data.selectionSize}
-    }
+    case 'SelectColorIndex':
+      return {...state, colorIndex: action.data}
+    case 'SelectBrushSize': 
+      return {...state, brushSize: action.data}
+    case 'SelectSelectionSize': 
+      return {...state, selectionSize: action.data}
     default: {
       return state
     }
   }
 }
 
-export default counterReducer
+export default drawReducer
