@@ -7,16 +7,29 @@ export type CodeState = {
 }
 const initialState: CodeState = {
   text: `log("hello world!")\n\nlet dot = spr()\ndot.x = 64\ndot.y = 64
-  stage.addChild(dot)\n\nupdate = () => {\n  dot.rotation += .1\n}\n`,
+stage.addChild(dot)\n\nupdate = () => {\n  dot.rotation += .1\n}\n`,
   logs: []
 }
 
-export type CodeAction
-  = { type: 'UpdateText', data: Text }
-  | { type: 'AddLog', data: Log }
-  | { type: 'ResetLogs' }
+type UpdateText = { type: 'UpdateText', data: Text }
+type AddLog = { type: 'AddLog', data: Log }
+type ResetLogs = { type: 'ResetLogs' }
 
-type Reducer = (s: CodeState, a: CodeAction) => CodeState
+export const codeActions = {
+  updateText: (data: UpdateText['data']): UpdateText => 
+    ({type: 'UpdateText', data}),
+  addLog: (data: AddLog['data']): AddLog => 
+    ({type: 'AddLog', data}),
+  resetLogs: (): ResetLogs =>
+    ({type: 'ResetLogs'})
+}
+
+export type CodeAction
+  = UpdateText
+  | AddLog
+  | ResetLogs
+
+type Reducer = (state: CodeState, action: CodeAction) => CodeState
 const codeReducer: Reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'UpdateText':
@@ -26,7 +39,7 @@ const codeReducer: Reducer = (state = initialState, action) => {
     case 'ResetLogs':
       return {...state, logs: []}
     default:
-      const check: never = action
+      const exhaustiveCheck: never = action
       return state
   }
 }

@@ -11,7 +11,7 @@ declare global {
     readonly code: CodeState
   }
 
-  type Dispatch = (a: CodeAction | DrawAction) => void
+  type Dispatch = Redux.Dispatch<StoreState>
 }
 
 const reducers = combineReducers<StoreState>({
@@ -28,7 +28,5 @@ if (isDev) {
 } else {
   store = createStore(reducers)
 }
-
-export const dispatch: Dispatch = (action) => store.dispatch(action)
 
 export default store

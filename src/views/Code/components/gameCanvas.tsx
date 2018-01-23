@@ -1,6 +1,7 @@
 import { Sprite, Application, Graphics, interaction, Rectangle } from 'pixi.js'
 import { image } from 'views/Draw/components/drawCanvas'
-import store, { dispatch } from 'store/store'
+import store from 'store/store'
+import { codeActions } from 'store/code'
 
 const app = new Application({
   width: 128,
@@ -11,7 +12,7 @@ let { stage } = app
 let _update: () => void
 
 let log = (value: string) => {
-  dispatch({type: 'AddLog', data: value.toString()})
+  store.dispatch(codeActions.addLog(value.toString()))
 }
 
 export const stop = () => {
@@ -25,7 +26,7 @@ export const reset = () => {
   while (stage.children[0]) { 
     stage.removeChild(stage.children[0])
   }
-  dispatch({type: 'ResetLogs'})
+  store.dispatch(codeActions.resetLogs())
 }
 
 export const run = () => {

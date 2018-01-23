@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styles from './Code.sass'
@@ -7,8 +8,9 @@ import Game from './components/Game'
 import * as gameCanvas from './components/gameCanvas'
 import Console from './components/Console'
 import MainLayout from 'components/Layouts/Main'
+import { CodeState, codeActions } from 'store/code'
 
-type Props = StateProps & DispatchProps
+type Props = StateProps & ActionProps
 
 class Code extends Component<Props> {
   componentWillUnmount () {
@@ -46,24 +48,14 @@ class Code extends Component<Props> {
   }
 }
 
-type StateProps = {
-  text: string,
-  logs: string[]
-}
+type StateProps = CodeState
 const mapStateToProps = (state: StoreState): StateProps => {
-  return {
-    text: state.code.text,
-    logs: state.code.logs
-  }
+  return state.code
 }
 
-type DispatchProps = {
-  updateText: (value: string) => void
-}
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
-  return {
-    updateText: (value: string) => dispatch({type: 'UpdateText', data: value})
-  }
+type ActionProps = typeof codeActions
+const mapDispatchToProps = (dispatch: Dispatch): ActionProps => {
+  return bindActionCreators(codeActions, dispatch)
 }
 
 export default connect(

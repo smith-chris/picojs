@@ -13,12 +13,26 @@ const initialState: DrawState = {
   selectionSize: 1
 }
 
-export type DrawAction
-  = { type: 'SelectColorIndex', data: ColorIndex }
-  | { type: 'SelectBrushSize', data: BrushSize }
-  | { type: 'SelectSelectionSize', data: SelectionSize }
+type SelectColorIndex = { type: 'SelectColorIndex', data: ColorIndex }
+type SelectBrushSize = { type: 'SelectBrushSize', data: BrushSize }
+type SelectSelectionSize = { type: 'SelectSelectionSize', data: SelectionSize }
 
-const drawReducer = (state = initialState, action: DrawAction) => {
+export const drawActions = {
+  selectColorIndex: (data: SelectColorIndex['data']): SelectColorIndex => 
+    ({type: 'SelectColorIndex', data}),
+  selectBrushSize: (data: SelectBrushSize['data']): SelectBrushSize => 
+    ({type: 'SelectBrushSize', data}),
+  selectSelectionSize: (data: SelectSelectionSize['data']): SelectSelectionSize => 
+    ({type: 'SelectSelectionSize', data})
+}
+
+export type DrawAction
+  = SelectColorIndex
+  | SelectBrushSize
+  | SelectSelectionSize
+
+type Reducer = (state: DrawState, action: DrawAction) => DrawState
+const drawReducer: Reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'SelectColorIndex':
       return {...state, colorIndex: action.data}
@@ -27,6 +41,7 @@ const drawReducer = (state = initialState, action: DrawAction) => {
     case 'SelectSelectionSize': 
       return {...state, selectionSize: action.data}
     default: {
+      const exhaustiveCheck: never = action
       return state
     }
   }

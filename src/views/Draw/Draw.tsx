@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styles from './Draw.sass'
@@ -8,15 +9,16 @@ import Slider from 'components/Slider/Slider'
 import Image from 'components/Image/Image'
 import Canvas from './components/Canvas'
 import MainLayout from 'components/Layouts/Main'
+import { drawActions } from 'store/draw'
 
-type Props = StateProps & DispatchProps
+type Props = StateProps & ActionProps
 
 class Draw extends Component<Props> {
   render() {
     let {
-      selectBrush,
+      selectBrushSize,
       brushSize,
-      selectSelection,
+      selectSelectionSize,
       selectionSize,
       colorIndex
     } = this.props
@@ -42,7 +44,7 @@ class Draw extends Component<Props> {
             </span>
             <Slider
               className={styles.slider}
-              onChange={selectBrush}
+              onChange={selectBrushSize}
               value={brushSize}
             />
             </div>
@@ -50,7 +52,7 @@ class Draw extends Component<Props> {
               <Image asset='selectionIcon'/>
               <Slider
                 className={styles.slider}              
-                onChange={selectSelection}
+                onChange={selectSelectionSize}
                 value={selectionSize}
               />
             </div>
@@ -66,13 +68,9 @@ const mapStateToProps = (state: StoreState): StateProps => {
   return state.draw
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
-  return {
-    selectBrush: (data) => 
-      dispatch({type: 'SelectBrushSize', data}),
-    selectSelection: (data) =>
-      dispatch({type: 'SelectSelectionSize', data})
-  }
+type ActionProps = typeof drawActions
+const mapDispatchToProps = (dispatch: Dispatch): ActionProps => {
+  return bindActionCreators(drawActions, dispatch)
 }
 
 export default connect(
